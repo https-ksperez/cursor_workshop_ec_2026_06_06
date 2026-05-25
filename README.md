@@ -19,7 +19,7 @@ cp .env.example .env.local
 
 Without Supabase env vars, the app renders demo markets and disables mutations.
 
-For live auth, markets, trading, and image uploads, create a Supabase project, apply `supabase/migrations/20260525000000_marketlab.sql`, and set:
+For live auth, markets, trading, and image uploads, create a Supabase project and set:
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=
@@ -28,6 +28,13 @@ SUPABASE_PROJECT_REF=
 ```
 
 The `NEXT_PUBLIC_*` values are used by the app. `SUPABASE_PROJECT_REF` is only for Supabase CLI scripts such as linking the hosted project and generating types.
+
+Apply migrations and seed demo markets to the hosted project:
+
+```bash
+bun run db:link
+bun run db:push
+```
 
 For workshop speed, disable email confirmations in Supabase Auth settings.
 
@@ -46,5 +53,6 @@ Open [http://localhost:3000](http://localhost:3000).
 - `bun run typecheck` - generate Next route types and run TypeScript.
 - `bun run test:run` - run unit tests.
 - `bun run e2e` - run the Playwright smoke test.
-- `bun run db:start` / `bun run db:stop` / `bun run db:reset` - manage the local Supabase stack.
-- `bun run db:link` / `bun run db:push` / `bun run db:types` - work with the hosted Supabase project.
+- `bun run db:link` - link the repo to the hosted Supabase project.
+- `bun run db:push` - apply migrations and seed demo markets.
+- `bun run db:types` - generate Supabase TypeScript types.
