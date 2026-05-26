@@ -31,15 +31,15 @@ task setup
 task hooks:install
 ```
 
-In your Supabase project dashboard, copy the project URL, anon key, and project ref into `.env.local`:
+In your Supabase project dashboard, click **Connect**, select **Next.js**, and copy the `.env.local` values:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
 SUPABASE_PROJECT_REF=
 ```
 
-You can find the URL and anon key under **Project Settings > API**. The project ref is the short project id in your Supabase project URL.
+Add `SUPABASE_PROJECT_REF` from your Supabase project URL: `https://supabase.com/dashboard/project/<project-ref>`.
 
 For workshop speed, go to **Authentication > Sign In / Providers > Email** and turn off **Confirm email**.
 
