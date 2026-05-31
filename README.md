@@ -15,19 +15,20 @@ bash ./scripts/unix-setup.sh
 
 ### Windows
 
-Run this in PowerShell:
+Open PowerShell and run this command first:
 
 ```powershell
 pwsh -ExecutionPolicy Bypass -File .\scripts\windows-setup.ps1
 ```
 
-If you use Windows PowerShell instead of PowerShell 7, run:
+If Windows says `pwsh` is not recognized, run this command instead:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\windows-setup.ps1
 ```
 
-After the script finishes, open a new terminal window.
+After the script finishes, close PowerShell and open a new PowerShell window
+before running the remaining commands.
 
 ## Supabase
 
@@ -69,6 +70,5 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
 task verify
-task e2e
 task --list
 ```
