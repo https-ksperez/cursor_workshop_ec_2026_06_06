@@ -27,8 +27,9 @@ If Windows says `pwsh` is not recognized, run this command instead:
 powershell -ExecutionPolicy Bypass -File .\scripts\windows-setup.ps1
 ```
 
-After the script finishes, close PowerShell and open a new PowerShell window
-before running the remaining commands.
+After the script finishes, open a new terminal window before running the
+remaining commands. The setup script adds mise activation to your shell so the
+tools pinned in `mise.toml` are available through normal `task ...` commands.
 
 ## Supabase
 
@@ -71,4 +72,22 @@ Open [http://localhost:3000](http://localhost:3000).
 ```bash
 task verify
 task --list
+```
+
+## Tool Troubleshooting
+
+If `task` is missing, the current shell probably has not loaded mise yet. Open
+a new terminal, or use the one-off fallback:
+
+```bash
+mise exec -- task dev
+```
+
+On macOS or Linux, if `mise` itself is not on `PATH`, use the full path from
+your installer. Common locations are:
+
+```bash
+~/.local/bin/mise exec -- task dev
+/opt/homebrew/bin/mise exec -- task dev
+/usr/local/bin/mise exec -- task dev
 ```
