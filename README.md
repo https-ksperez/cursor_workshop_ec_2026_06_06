@@ -39,34 +39,6 @@ Allow it once for your user, then open a new window:
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
 ```
 
-## Supabase
-
-Create a hosted Supabase project, then copy the Next.js environment values into
-`.env.local`:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
-SUPABASE_PROJECT_REF=
-```
-
-You can find `SUPABASE_PROJECT_REF` in your project URL:
-
-```text
-https://supabase.com/dashboard/project/<project-ref>
-```
-
-For the workshop, go to **Authentication > Sign In / Providers > Email** and
-turn off **Confirm email**.
-
-Then link the repo and generate types:
-
-```bash
-task db:login
-task db:link
-task db:types
-```
-
 ## Run
 
 ```bash
