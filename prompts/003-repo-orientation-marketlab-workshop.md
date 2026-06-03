@@ -2,13 +2,6 @@
 
 I am starting the MarketLab workshop and want to understand the existing repo before writing code.
 
-Work in read-only mode:
-
-- Do not edit, create, delete, or rename files.
-- Do not install packages.
-- Do not run migrations, database pushes, or deployment commands.
-- Only inspect the repo and explain what is already there.
-
 Inspect the repo first, especially these files and folders if they exist:
 
 - `README.md`
