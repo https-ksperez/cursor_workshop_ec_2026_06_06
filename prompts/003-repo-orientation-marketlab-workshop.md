@@ -1,33 +1,141 @@
-# 003 - Repo Orientation For MarketLab Workshop
+# 003 - Repo Orientation for MarketLab Workshop
 
-I am starting the MarketLab workshop and want to understand the existing repo before writing code. Do not change files. Inspect the repo first, especially `README.md`, `Taskfile.yml`, `package.json`, `src/app`, `src/components`, `src/lib`, and `supabase/`. Keep the explanation concise and beginner-friendly.
+I am starting the MarketLab workshop and want to understand the existing repo before writing code.
 
-Explain the repo in these sections:
+Work in read-only mode:
 
-## Mental model
+- Do not edit, create, delete, or rename files.
+- Do not install packages.
+- Do not run migrations, database pushes, or deployment commands.
+- Only inspect the repo and explain what is already there.
 
-Summarize how the app is organized in 3-5 sentences, including App Router routes/layouts, Server Components by default, Server Actions for mutations, and Supabase for auth, data, and storage.
+Inspect the repo first, especially these files and folders if they exist:
 
-## Key folders and files
+- `README.md`
+- `Taskfile.yml`
+- `package.json`
+- `src/app`
+- `src/components`
+- `src/lib`
+- `src/lib/supabase`
+- `supabase/`
+- global styles
+- shared utilities
 
-Provide a table with columns `path`, `purpose`, and `why it matters`. Cover `src/app`, `src/components`, `src/lib`, `src/lib/supabase`, `supabase/`, global styles, shared utilities, and the Supabase browser/server clients. Use the actual paths in this repo and skip anything that does not exist.
+Use the actual paths in this repo. Skip any file or folder that does not exist. Do not guess. If something is missing, say it is not present.
 
-## Commands
+Keep the explanation concise, beginner-friendly, and workshop-focused.
 
-Use `Taskfile.yml` as the source of truth. Provide a table with columns `task command`, `what it does`, and `when to use it`. Cover setup, dev, db login/link/push/types, check/lint/format, typecheck, tests, and full verification. Note the matching `package.json` script where useful.
+Explain the repo using these sections:
 
-## Supabase notes
+## 1. Mental model
 
-Explain where the clients, generated database types, migrations, seed data, and expected environment variables live, plus what is required to run the app locally.
+Summarize how the app is organized in 3-5 sentences.
 
-## Testing and quality
+Include:
 
-Name the test framework, lint/format tooling, and the single command to run before considering work done.
+- How the Next.js App Router is structured with routes and layouts
+- That components are Server Components by default unless marked with `"use client"`
+- How Server Actions are used for mutations, if present
+- How Supabase is used for auth, data, and storage, if present
 
-## First-change recommendation
+## 2. Important folders and files
 
-Recommend the safest place to make the first workshop change and what to avoid touching too early.
+Provide a table with these columns:
 
-## Risks or missing setup
+| path | purpose | why it matters |
+| ---- | ------- | -------------- |
 
-End with a short checklist of anything that could block a participant.
+Cover the important existing paths only, including:
+
+- `src/app`
+- `src/components`
+- `src/lib`
+- `src/lib/supabase`
+- `supabase/`
+- global styles
+- shared utilities
+- Supabase browser client
+- Supabase server client
+- generated database types
+
+Skip anything that does not exist in this repo.
+
+## 3. Commands
+
+Use `Taskfile.yml` as the source of truth.
+
+Provide a table with these columns:
+
+| task command | what it does | when to use it |
+| ------------ | ------------ | -------------- |
+
+Cover the relevant tasks that exist for:
+
+- setup
+- dev
+- Supabase login
+- Supabase link
+- database push
+- database types
+- check
+- lint
+- format
+- typecheck
+- tests
+- full verification
+
+When useful, mention the matching `package.json` script, but treat `Taskfile.yml` as the main source of truth.
+
+## 4. Supabase setup notes
+
+Explain where these live in the repo:
+
+- Supabase clients
+- generated database types
+- migrations
+- seed data
+- expected environment variables
+
+Also explain what a participant needs before running the app locally, such as:
+
+- dependency installation
+- local environment variables
+- Supabase project connection
+- database migrations/types, if required
+
+## 5. Testing and quality checks
+
+Explain:
+
+- The test framework used by the repo
+- The linting tool
+- The formatting tool
+- The typechecking command
+- The single best command to run before considering work complete
+
+## 6. Safest first place to edit
+
+Recommend the best first area for a participant to modify during the workshop.
+
+Explain:
+
+- Why it is a safe starting point
+- What kind of change is appropriate there
+- What files or systems to avoid touching too early, such as auth, database migrations, generated types, or shared Supabase clients
+
+## 7. Setup blockers checklist
+
+End with a short checklist of things that could block a participant from running or completing the workshop.
+
+Examples:
+
+- Missing environment variables
+- Supabase project not linked
+- Dependencies not installed
+- Database migrations not applied
+- Generated types out of date
+- Wrong Node or package manager version
+- Required CLI tools missing
+
+Keep this checklist practical and short.
