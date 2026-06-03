@@ -2,20 +2,7 @@
 
 I am starting the MarketLab workshop and want to understand the existing repo before writing code.
 
-Inspect the repo first, especially these files and folders if they exist:
-
-- `README.md`
-- `Taskfile.yml`
-- `package.json`
-- `src/app`
-- `src/components`
-- `src/lib`
-- `src/lib/supabase`
-- `supabase/`
-- global styles
-- shared utilities
-
-Use the actual paths in this repo. Skip any file or folder that does not exist. Do not guess. If something is missing, say it is not present.
+Inspect the repo before answering. Use the actual files, folders, commands, and config that exist in this repo. Do not guess; if something is missing, say it is not present.
 
 Keep the explanation concise, beginner-friendly, and workshop-focused.
 
