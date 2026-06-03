@@ -4,8 +4,7 @@ MarketLab is a fake-money prediction market app for the Cursor workshop.
 
 ## Setup
 
-Clone the repo, open a terminal in the project folder, and run the setup script
-for your operating system.
+Open this repo in Cursor and run the setup command for your operating system.
 
 ### macOS / Linux
 
@@ -15,29 +14,17 @@ bash ./scripts/unix-setup.sh
 
 ### Windows
 
-Open PowerShell and run this command first:
-
 ```powershell
 pwsh -ExecutionPolicy Bypass -File .\scripts\windows-setup.ps1
 ```
 
-If Windows says `pwsh` is not recognized, run this command instead:
+If `pwsh` is not available:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\windows-setup.ps1
 ```
 
-After the script finishes, open a new terminal window before running the
-remaining commands. The setup script adds mise activation to your shell so the
-tools pinned in `mise.toml` are available through normal `task ...` commands.
-
-If a new PowerShell window still reports that `task` is not recognized, your
-execution policy is likely blocking the PowerShell profile that activates mise.
-Allow it once for your user, then open a new window:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
-```
+After setup finishes, open a new Cursor terminal.
 
 ## Run
 
@@ -46,29 +33,3 @@ task dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
-
-## Useful Commands
-
-```bash
-task verify
-task --list
-```
-
-## Tool Troubleshooting
-
-If `task` is missing, the current shell probably has not loaded mise yet. Open
-a new terminal, or activate mise in the current shell:
-
-```powershell
-(& mise activate pwsh) | Out-String | Invoke-Expression
-task dev
-```
-
-On macOS or Linux:
-
-```bash
-eval "$(mise activate bash)"
-task dev
-```
-
-Use `mise activate zsh` instead if your shell is zsh.
