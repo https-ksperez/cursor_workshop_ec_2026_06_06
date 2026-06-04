@@ -1,6 +1,6 @@
 # 002 - Configure Supabase Env And Link Project
 
-Configure Supabase for the provided project ref.
+Configure Supabase for project `<YOUR_PROJECT_REF>`.
 
 Do only this setup task. Do not create schema, run migrations, seed data, or change app code.
 
