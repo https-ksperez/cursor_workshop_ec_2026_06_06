@@ -81,22 +81,6 @@ If adding tests is not practical yet, document a small manual verification path:
 - confirm the page works while signed out
 - confirm the layout is responsive
 
-## Do Not Implement
-
-- auth UI
-- buying
-- selling
-- dynamic pricing
-- order books
-- AMMs
-- liquidity pools
-- real payments
-- political markets
-- comments
-- notifications
-- analytics
-- market creation
-
 ## Explain After Implementing
 
 1. Which files changed
