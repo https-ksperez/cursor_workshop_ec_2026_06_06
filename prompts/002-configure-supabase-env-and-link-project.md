@@ -1,18 +1,41 @@
 # 002 - Configure Supabase Env And Link Project
 
-Configure Supabase for project `<YOUR_PROJECT_REF>`.
+Configure Supabase using the Taskfile commands.
 
 Do only this setup task. Do not create schema, run migrations, seed data, or change app code.
 
-## Steps
+If you do not have the project ref, ask for it and stop.
 
-1. If the Supabase project ref is not provided, ask for it and stop.
-2. Run `task db:login`.
-3. Complete the Supabase browser login when the window opens, then wait for the command to finish.
-4. If the browser does not open, login fails, or the command stalls, stop and report the issue. Do not try unrelated commands.
-5. Create or update `.env.local` using the variable names from `.env.example`.
-6. Set the project ref and URL.
-7. Add the project's public publishable/anon key. Do not use a service-role key.
-8. Run `task db:link`.
+## Run These Commands
+
+1. If `.env.local` does not exist, run:
+
+```bash
+task setup
+```
+
+2. Run:
+
+```bash
+task db:login
+```
+
+Complete the Supabase browser login when the window opens, then wait for the command to finish. If the browser does not open, login fails, or the command stalls, stop and report the issue.
+
+3. Create or update `.env.local` using only the variable names from `.env.example`:
+
+- `SUPABASE_PROJECT_REF`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+
+Use the project ref, the matching Supabase project URL, and the public publishable/anon key. Do not use a service-role key.
+
+4. Run:
+
+```bash
+SUPABASE_PROJECT_REF=<YOUR_PROJECT_REF> task db:link
+```
+
+Use only Taskfile commands for setup and Supabase work. Do not run raw `supabase login`, `supabase link`, migrations, seed data, or unrelated app commands.
 
 When done, report which values were set, masking any key value except the first and last few characters.
