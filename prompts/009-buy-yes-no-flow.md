@@ -41,6 +41,8 @@ Signed-in users can:
 
 Signed-out users should be asked to sign in. Closed, resolved, draft, missing, or expired markets are not buyable.
 
+Use real Supabase data from the existing schema and seed data. Do not use fake client mock data for markets, balances, positions, or ledger state.
+
 Keep copy clear that this uses fake money, and avoid language that sounds like real investing, gambling, or trading advice. Keep the form responsive, light/dark compatible, and consistent with the market detail page.
 
 ## Server Mutation
