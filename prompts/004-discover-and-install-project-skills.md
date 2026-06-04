@@ -19,48 +19,4 @@ Group them into Tier 1, Tier 2, and Defer if that helps. Keep it brief and do no
 
 Install Tier 1 and Tier 2. From `main`, create a clearly named branch, commit, push, and open a PR when done.
 
-Project skills should live in `.agents/skills/` with `skills-lock.json`. Update `AGENTS.md` to mention that, and update `biome.json` to exclude skills:
-
-```json
-{
-  "$schema": "https://biomejs.dev/schemas/2.4.16/schema.json",
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
-  "files": {
-    "ignoreUnknown": true,
-    "includes": ["**", "!!**/.agents"]
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "indentWidth": 2
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "double"
-    }
-  },
-  "css": {
-    "parser": {
-      "tailwindDirectives": true
-    }
-  },
-  "assist": {
-    "enabled": true,
-    "actions": {
-      "source": {
-        "organizeImports": "on"
-      }
-    }
-  }
-}
-```
+Project skills should live in `.agents/skills/` with `skills-lock.json`. Update `AGENTS.md` to mention that.
