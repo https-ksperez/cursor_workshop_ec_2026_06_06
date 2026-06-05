@@ -1,6 +1,6 @@
-Inspect this repo and write a concise developer handoff for an AI coding agent.
+Inspect this repo and write a concise, plain-language orientation for an AI coding agent and non-technical workshop participants.
 
-Use only repo facts from the codebase, README, AGENTS.md, and Taskfile.yml. Do not guess. Keep the entire document under 200 words. Avoid generic framework explanations and folder tours.
+Use only repo facts from the codebase, README, AGENTS.md, and Taskfile.yml. Do not guess. Keep the entire document under 200 words. Avoid generic framework explanations, folder tours, and jargon; briefly explain any necessary technical terms.
 
 ## Repo brief
 
