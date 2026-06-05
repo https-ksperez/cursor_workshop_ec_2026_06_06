@@ -1,0 +1,192 @@
+# 010 - MarketLab Profile & Market Images Integration
+
+Enhance the MarketLab auth-aware UI and Supabase Storage integration.
+
+Context:
+The authentication flow already exists. Follow AGENTS.md and existing Supabase client/server patterns. Keep the UI consistent with the current clean dashboard design and light/dark theme support.
+
+The final goal is:
+1. User profile avatars in the navbar.
+2. An Edit Account view for profile updates.
+3. Supabase Storage buckets for user avatars and market images.
+4. Market images displayed cleanly in /markets and /markets/[id].
+5. No broken image placeholders, fallback text, or unwanted layout shifts.
+
+Navbar & Avatar Dropdown
+
+Update the signed-in navbar state:
+- Replace the standalone Sign Out button with a clickable user avatar.
+- Fetch the avatar reference from the current user's profile.
+- If the user has an uploaded avatar, show it.
+- If the user has no avatar, show initials fallback.
+- Clicking the avatar opens an accessible dropdown.
+- Dropdown options:
+  - Edit Account
+  - Sign Out
+- Dropdown must close when clicking outside and work with keyboard navigation.
+- Styling must match the app in light and dark modes.
+
+Edit Account View
+
+Create an /account route:
+- Require authentication.
+- Load current profile data.
+- Add a clear navigation link above the form to return to the main markets/dashboard view.
+  - The link should be visually consistent with the app.
+  - Suggested label: “Back to Markets” or “Back to Dashboard”.
+- Show editable first name and last name fields.
+- Show email as visible but strictly disabled/read-only.
+- Include profile picture upload.
+- Upload avatar files to Supabase Storage bucket avatars.
+- Store avatar path/reference in profiles.avatar_path.
+- Validate avatar uploads:
+  - Image files only.
+  - Max size around 5 MB.
+- When the user selects an avatar file, immediately preview the selected image in the Edit Account view.
+  - The preview should update instantly before saving.
+  - The preview should not upload or replace the existing Supabase avatar yet.
+  - The existing avatar in Supabase should only be replaced after the user clicks the Save button.
+  - If the user selects a different file before saving, update the preview to the newest selected file.
+  - If no new image is selected, keep showing the current avatar or initials fallback.
+  - Do not show broken image icons or fallback text if the preview fails.
+- After saving, refresh/revalidate so the navbar avatar updates without a full browser reload.
+- Do not expose service role or privileged keys to the browser.
+
+Supabase Storage & Database
+
+Create migrations for:
+- profiles.avatar_path
+- markets.image_path
+- Storage bucket avatars
+- Storage bucket market_images
+
+Profile/avatar RLS:
+- Users can read their own profile.
+- Users can update only their own profile row.
+- Profile update policy must use both USING and WITH CHECK.
+- Anyone may view avatars.
+- Authenticated users can upload/update/delete only avatar files in their own folder:
+  {user_id}/avatar.{extension}
+
+Market images:
+- Bucket name: market_images
+- Public-readable.
+- No UI for uploading market images.
+- Images are uploaded manually in Supabase Storage.
+- The full public Storage URL is manually stored in markets.image_path.
+- Also optionally support object-path fallback if useful, but the primary workflow is storing the full public URL.
+
+Market Image URL Logic
+
+Implement a helper like resolveMarketImageUrl():
+- If image_path is null, empty, or whitespace, return null.
+- If image_path starts with http:// or https://, use it directly.
+- If it is only an object path, optionally build:
+  {SUPABASE_URL}/storage/v1/object/public/market_images/{image_path}
+
+Market Image Component Behavior
+
+Create a reusable MarketImage component:
+- Client component.
+- Receives imageUrl.
+- If no URL, render nothing.
+- If the image fails to load, render nothing.
+- Do not show broken image icons.
+- Do not show alt fallback text.
+- Use alt="" and aria-hidden.
+- Show the image immediately when a valid URL exists.
+- Use onError to hide/remove it only if it fails.
+- Use a key={imageUrl ?? market.id} when rendering per market so cached/navigation changes do not prevent image display.
+
+Market Cards (/markets)
+
+Display the market image inside each card if the market has one.
+
+Final visual requirements:
+- Image should appear as a small thumbnail on the top-right side.
+- It should sit below the Open status badge.
+- Suggested size: 56px × 56px (size-14).
+- Use object-cover, rounded corners, and subtle border/ring.
+- Cards with images must not become visually taller than cards without images.
+- Cards without images must not display placeholders or fallback text.
+- Reserve consistent top-right space for the image area so title/content alignment stays clean.
+- The card grid should use equal-height cards per row.
+- The footer (Closes... and View) should stay aligned at the bottom.
+- The description should use natural height and should not create a large gap below it.
+- Avoid forcing min-height on the description itself.
+- If extra flexible space is needed to keep the footer aligned, place it between description and footer, not inside the description.
+
+Recommended card structure:
+- Left top area:
+  - Yes / No market
+  - title
+- Right top area:
+  - status badge
+  - small market image thumbnail if available
+- Middle:
+  - description
+- Bottom:
+  - divider
+  - close date
+  - View button
+
+Selected Market View (/markets/[id])
+
+Also show the market image in the selected market detail view.
+
+Final visual requirements:
+- Show the image in the top-right area of the market detail info panel.
+- It should appear below the status badge.
+- Suggested size: 80px × 80px (size-20).
+- Use object-cover, rounded corners, and subtle border/ring.
+- If the market has no image or the image fails, show nothing extra.
+- Keep title and market metadata aligned cleanly on the left.
+- Do not show a large hero image unless explicitly requested.
+
+Testing / Verification
+
+If tests exist, add/update focused tests for:
+- Avatar fallback initials.
+- Avatar URL handling.
+- Header signed-in avatar dropdown.
+- Edit Account form with disabled email field.
+- Edit Account back navigation link.
+- Avatar upload immediate local preview behavior.
+- Avatar preview does not upload or replace Supabase storage until Save is clicked.
+- Avatar upload validation and storage upload path.
+- resolveMarketImageUrl() behavior:
+  - null/empty returns null
+  - full public URL is used directly
+  - optional object path fallback works
+- Market cards render MarketImage.
+- Market detail view renders MarketImage.
+- MarketImage uses alt="", handles onError, and does not rely on hidden loading state that can break cached images.
+- Market card layout reserves image space and keeps equal-height cards.
+
+Run:
+- Unit tests.
+- Typecheck.
+- Biome/check if practical.
+
+Manual verification:
+Profile image:
+1. Sign in.
+2. Confirm navbar avatar/initials appear.
+3. Open avatar dropdown and confirm Edit Account / Sign Out work.
+4. Open Edit Account.
+5. Confirm there is a clear link above the form to return to the main markets/dashboard view.
+6. Select a new avatar image and confirm it previews immediately before saving.
+7. Confirm the Supabase avatar is not replaced until Save is clicked.
+8. Save account changes and confirm the avatar uploads/replaces the existing avatar in Supabase.
+9. Confirm navbar avatar updates.
+Market image:
+10. Upload a market image manually to market_images.
+11. Copy its public URL.
+12. Store that URL in markets.image_path.
+13. Open /markets.
+14. Confirm market image appears as a small top-right thumbnail below Open.
+15. Confirm cards with and without images look balanced.
+16. Confirm no broken image icon/text appears when image is missing or invalid.
+17. Open /markets/[id].
+18. Confirm the same market image appears in the selected market detail panel, top-right below Open.
+19. Confirm removing or breaking image_path hides the image cleanly.
