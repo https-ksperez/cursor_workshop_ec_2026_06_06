@@ -56,9 +56,11 @@ The page should quickly communicate: "Browse fictional Yes/No markets using fake
 - Do not add client-side insert/update/delete behavior for markets.
 - Do not add user-owned markets.
 - Do not add admin behavior in this step.
-- Markets should come from existing seed data.
-- Do not create fake/mock market data in the UI, tests, or fallback code; use Supabase seed data only.
-- Run `task db:push` as part of this task so seeded markets are available; do not stop to ask for confirmation first.
+- Markets should come from Supabase data created by the existing database setup.
+- Do not create fake/mock market data in the UI or fallback code.
+- Do not add new seed data, migrations, scripts, or hard-coded records that populate Supabase in this step.
+- Test fixtures or mocked Supabase responses are okay for focused unit tests only.
+- Run `task db:push` as part of this task to apply the existing database setup; do not stop to ask for confirmation first.
 
 ## Testing / Verification
 
