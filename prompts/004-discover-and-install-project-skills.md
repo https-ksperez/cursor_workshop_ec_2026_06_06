@@ -1,5 +1,7 @@
 # 004 - Discover And Install Project Skills
 
+Before starting, log in to GitHub CLI with `gh auth login` and confirm it works with `gh auth status`.
+
 Use these prompt parts in order.
 
 ## 1. Install Skill Finder
