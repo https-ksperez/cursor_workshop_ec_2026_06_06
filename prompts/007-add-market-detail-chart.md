@@ -9,7 +9,6 @@ Add a read-only Polymarket-style chart section to the market detail page:
 - Y axis: `0-100%`
 - X axis: time
 - Add simple range toggles if practical: `1D` / `1W` / `ALL`.
-- Use `market_price_history` seed data if it exists.
 - If not, create a deterministic mock series from `market.id` in `src/lib/`.
 - Keep the chart stable for tests.
 - Use SVG/CSS or a small local component; do not add chart packages unless unavoidable.
