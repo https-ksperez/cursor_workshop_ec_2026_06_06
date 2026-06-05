@@ -1,4 +1,4 @@
-# 009 - Buy Yes / No Flow + My Positions View
+# 008 - Buy Yes / No Flow + My Positions View
 
 Build the complete fake-money Buy Yes / No flow and the My Positions page in one pass.
 

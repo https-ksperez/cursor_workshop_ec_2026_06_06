@@ -1,4 +1,4 @@
-# 008 - Auth-Aware UI And Profile Balance
+# 007 - Auth-Aware UI And Profile Balance
 
 Build the auth-aware UI needed for users to sign in, sign up, sign out, and see their fake-money balance.
 

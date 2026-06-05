@@ -1,4 +1,4 @@
-# 010 - MarketLab UI/UX Redesign
+# 009 - MarketLab UI/UX Redesign
 
 Significantly improve the MarketLab UI. This is not a small polish pass: the app was built incrementally, so make it cohesive, modern, and demo-ready for a Cursor + Supabase workshop.
 
